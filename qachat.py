@@ -4,6 +4,7 @@ load_dotenv() ## loading all the environment variables
 import streamlit as st
 import os
 import google.generativeai as genai
+import streamlit
 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
@@ -32,7 +33,7 @@ if submit and input:
     response=get_gemini_response(input)
     # Add user query and response to session state chat history
     st.session_state['chat_history'].append(("You", input))
-    st.subheader("The Response is")
+    st.subheader("Your response is")
     for chunk in response:
         st.write(chunk.text)
         st.session_state['chat_history'].append(("Bot", chunk.text))
